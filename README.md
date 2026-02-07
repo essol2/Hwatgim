@@ -14,6 +14,12 @@
 
 ## ❤️ 홧김 캐릭터: 불덩이
 
+<p align="center">
+  <img src="Resources/hwatgimi_light.png" width="200" alt="홧김이 라이트"/>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="Resources/hwatgimi_dark.png" width="200" alt="홧김이 다크"/>
+</p>
+
 
 
 ## ✨ 주요 기능 (MVP)
@@ -43,8 +49,6 @@
 - **컬러**: Deep Charcoal Black (`#121212`) & Muted Red (`#D32F2F`)
 - **캐릭터**: 미니멀하고 귀여운 불덩이 캐릭터 '홧김이'
 - **UI 요소**: 모든 버튼과 카드는 24pt 이상의 라운드 값을 적용하여 시각적 편안함을 제공합니다.
-
-
 
 ## 🛠 기술 스택
 
