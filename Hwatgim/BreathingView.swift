@@ -59,10 +59,10 @@ final class BreathingViewModel {
     private var animationTo: CGFloat = 0.6
     private var animationDuration: Double = 0
 
-    // Haptic generators
+    // Haptic generators — 각 단계별로 다른 패턴의 햅틱
     private let impactHeavy = UIImpactFeedbackGenerator(style: .heavy)
-    private let impactMedium = UIImpactFeedbackGenerator(style: .medium)
-    private let impactLight = UIImpactFeedbackGenerator(style: .light)
+    private let impactSoft = UIImpactFeedbackGenerator(style: .soft)
+    private let notificationFeedback = UINotificationFeedbackGenerator()
 
     func startPressing() {
         isPressing = true
@@ -220,11 +220,17 @@ final class BreathingViewModel {
     private func triggerPhaseHaptic(_ phase: BreathingPhase) {
         switch phase {
         case .inhale:
-            impactHeavy.impactOccurred()
+            // "쿵" — 묵직한 단일 진동으로 들이마시기 시작 알림
+            impactHeavy.impactOccurred(intensity: 1.0)
         case .hold:
-            impactMedium.impactOccurred()
+            // "따닥" — success 패턴(2번 진동)으로 멈추기 전환 알림
+            notificationFeedback.notificationOccurred(.success)
         case .exhale:
-            impactLight.impactOccurred()
+            // "톡-톡" — soft 진동 2번 연속으로 내뱉기 전환 알림
+            impactSoft.impactOccurred(intensity: 0.7)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) { [weak self] in
+                self?.impactSoft.impactOccurred(intensity: 0.7)
+            }
         default:
             break
         }
@@ -246,6 +252,7 @@ private class DisplayLinkProxy {
 struct BreathingView: View {
     @State private var viewModel = BreathingViewModel()
     @State private var showRecordView = false
+    @State private var currentQuote: Quote? = QuoteService.randomQuote()
 
     private let maxCircleSize: CGFloat = 300
     private let circleStrokeWidth: CGFloat = 3
@@ -257,6 +264,11 @@ struct BreathingView: View {
                 .ignoresSafeArea()
 
             VStack {
+                // Quote
+                quoteCard
+                    .padding(.horizontal, 24)
+                    .padding(.top, 16)
+
                 Spacer()
 
                 // Breathing Circle
@@ -273,6 +285,44 @@ struct BreathingView: View {
         }
         .fullScreenCover(isPresented: $showRecordView) {
             RecordView()
+        }
+    }
+
+    // MARK: - Quote Card
+    private var quoteCard: some View {
+        HStack(spacing: 12) {
+            // 명언 텍스트
+            VStack(spacing: 6) {
+                if let quote = currentQuote {
+                    Text(quote.text)
+                        .font(.custom("HakgyoansimDunggeunmisoOTF-R", size: 13))
+                        .foregroundColor(.white.opacity(0.85))
+                        .multilineTextAlignment(.center)
+                        .lineSpacing(4)
+
+                    Text("- \(quote.author)")
+                        .font(.custom("HakgyoansimDunggeunmisoOTF-R", size: 11))
+                        .foregroundColor(.white.opacity(0.4))
+                }
+            }
+            .frame(maxWidth: .infinity)
+
+            // 불덩이 캐릭터
+            Image("fire_angry")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 52, height: 52)
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 14)
+        .background(
+            RoundedRectangle(cornerRadius: 20)
+                .fill(Color.white.opacity(0.08))
+        )
+        .onTapGesture {
+            withAnimation(.easeInOut(duration: 0.3)) {
+                currentQuote = QuoteService.randomQuote()
+            }
         }
     }
 
@@ -347,7 +397,7 @@ struct BreathingView: View {
         Button(action: {
             showRecordView = true
         }) {
-            Text("숨 고르지 않고 바로 기록하기")
+            Text("분노 기록하기")
                 .font(.custom("HakgyoansimDunggeunmisoOTF-R", size: 16))
                 .foregroundColor(.white.opacity(0.8))
                 .frame(maxWidth: .infinity)

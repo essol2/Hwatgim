@@ -18,6 +18,8 @@
 		A1000009 /* HakgyoansimDunggeunmisoOTF-B.otf in Resources */ = {isa = PBXBuildFile; fileRef = A2000009 /* HakgyoansimDunggeunmisoOTF-B.otf */; };
 		A100000A /* HakgyoansimDunggeunmisoOTF-R.otf in Resources */ = {isa = PBXBuildFile; fileRef = A200000A /* HakgyoansimDunggeunmisoOTF-R.otf */; };
 		A100000B /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200000B /* RecordView.swift */; };
+		A100000C /* quotes.json in Resources */ = {isa = PBXBuildFile; fileRef = A200000C /* quotes.json */; };
+		A100000D /* QuoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200000D /* QuoteService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		A2000009 /* HakgyoansimDunggeunmisoOTF-B.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HakgyoansimDunggeunmisoOTF-B.otf"; sourceTree = "<group>"; };
 		A200000A /* HakgyoansimDunggeunmisoOTF-R.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HakgyoansimDunggeunmisoOTF-R.otf"; sourceTree = "<group>"; };
 		A200000B /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
+		A200000C /* quotes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = quotes.json; sourceTree = "<group>"; };
+		A200000D /* QuoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteService.swift; sourceTree = "<group>"; };
 		A2000010 /* Hwatgim.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hwatgim.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -64,6 +68,8 @@
 				A2000007 /* LogView.swift */,
 				A2000008 /* SettingsView.swift */,
 				A200000B /* RecordView.swift */,
+				A200000C /* quotes.json */,
+				A200000D /* QuoteService.swift */,
 				A4000005 /* Fonts */,
 				A2000004 /* Assets.xcassets */,
 				A4000003 /* Preview Content */,
@@ -158,6 +164,7 @@
 				A1000004 /* Assets.xcassets in Resources */,
 				A1000009 /* HakgyoansimDunggeunmisoOTF-B.otf in Resources */,
 				A100000A /* HakgyoansimDunggeunmisoOTF-R.otf in Resources */,
+				A100000C /* quotes.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,6 +182,7 @@
 				A1000007 /* LogView.swift in Sources */,
 				A1000008 /* SettingsView.swift in Sources */,
 				A100000B /* RecordView.swift in Sources */,
+				A100000D /* QuoteService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
