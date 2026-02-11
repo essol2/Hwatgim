@@ -21,12 +21,12 @@ struct SettingsView: View {
                     headerSection
 
                     // MARK: - Profile Card
-                    profileCard
+//                    profileCard
 
                     // MARK: - Settings Items
                     VStack(spacing: 12) {
-                        notificationRow
-                        darkModeRow
+//                        notificationRow
+//                        darkModeRow
                         appInfoRow
                         contactRow
                     }

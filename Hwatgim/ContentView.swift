@@ -53,6 +53,7 @@ struct ContentView: View {
                 }
                 .tag(2)
         }
+        .background(Color(red: 0.1, green: 0.1, blue: 0.1).ignoresSafeArea())
     }
 }
 
