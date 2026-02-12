@@ -286,26 +286,47 @@ struct BreathingView: View {
         .fullScreenCover(isPresented: $showRecordView) {
             RecordView()
         }
+        .onAppear {
+            currentQuote = QuoteService.randomQuote()
+        }
     }
 
     // MARK: - Quote Card
     private var quoteCard: some View {
-        HStack(spacing: 12) {
+        HStack(spacing: 0) {
+            // 왼쪽 악센트 바
+            RoundedRectangle(cornerRadius: 2)
+                .fill(
+                    LinearGradient(
+                        colors: [
+                            Color(red: 0.9, green: 0.3, blue: 0.2).opacity(0.8),
+                            Color(red: 0.7, green: 0.15, blue: 0.1).opacity(0.4)
+                        ],
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                )
+                .frame(width: 3)
+                .padding(.vertical, 4)
+
             // 명언 텍스트
             VStack(spacing: 6) {
                 if let quote = currentQuote {
                     Text(quote.text)
                         .font(.custom("HakgyoansimDunggeunmisoOTF-R", size: 13))
                         .foregroundColor(.white.opacity(0.85))
-                        .multilineTextAlignment(.center)
+                        .multilineTextAlignment(.leading)
                         .lineSpacing(4)
+                        .frame(maxWidth: .infinity, alignment: .leading)
 
                     Text("- \(quote.author)")
                         .font(.custom("HakgyoansimDunggeunmisoOTF-R", size: 11))
                         .foregroundColor(.white.opacity(0.4))
+                        .frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
             .frame(maxWidth: .infinity)
+            .padding(.horizontal, 12)
 
             // 불덩이 캐릭터
             Image("fire_angry")
@@ -313,11 +334,12 @@ struct BreathingView: View {
                 .scaledToFit()
                 .frame(width: 52, height: 52)
         }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 14)
+        .padding(.horizontal, 14)
+        .padding(.vertical, 12)
+        .fixedSize(horizontal: false, vertical: true)
         .background(
-            RoundedRectangle(cornerRadius: 20)
-                .fill(Color.white.opacity(0.08))
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color.white.opacity(0.06))
         )
         .onTapGesture {
             withAnimation(.easeInOut(duration: 0.3)) {

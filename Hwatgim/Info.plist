@@ -7,5 +7,16 @@
 		<string>HakgyoansimDunggeunmisoOTF-B.otf</string>
 		<string>HakgyoansimDunggeunmisoOTF-R.otf</string>
 	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>hwatgim</string>
+			</array>
+			<key>CFBundleURLName</key>
+			<string>com.essol2.hwatgim</string>
+		</dict>
+	</array>
 </dict>
 </plist>

@@ -9,7 +9,6 @@ import SwiftData
 struct LogDetailView: View {
     @Environment(\.dismiss) private var dismiss
     let item: Item
-    let dailyCount: Int
 
     @State private var quote: Quote? = QuoteService.randomQuote()
     @State private var dragOffset: CGFloat = 0
@@ -132,7 +131,7 @@ struct LogDetailView: View {
                 ForEach(0..<5, id: \.self) { index in
                     Image(systemName: "flame.fill")
                         .font(.system(size: 24))
-                        .foregroundColor(index < dailyCount
+                        .foregroundColor(index < item.intensity
                             ? Color(red: 0.9, green: 0.35, blue: 0.25)
                             : Color.white.opacity(0.15))
                 }
@@ -214,7 +213,6 @@ struct LogDetailView: View {
 
 #Preview {
     LogDetailView(
-        item: Item(timestamp: Date(), reason: "업무", mood: "답답함", detail: "프로젝트 마감이 다가오는데 팀원들이 제대로 협조하지 않아서 너무 답답했다. 혼자서 모든 걸 떠안은 기분이었고, 커뮤니케이션도 제대로 안 돼서 스트레스가 심했다."),
-        dailyCount: 4
+        item: Item(timestamp: Date(), reason: "업무", mood: "답답함", detail: "프로젝트 마감이 다가오는데 팀원들이 제대로 협조하지 않아서 너무 답답했다. 혼자서 모든 걸 떠안은 기분이었고, 커뮤니케이션도 제대로 안 돼서 스트레스가 심했다.", intensity: 4)
     )
 }

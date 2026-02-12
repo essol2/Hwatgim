@@ -123,7 +123,7 @@ struct LogView: View {
     private func recordCard(date: String, items: [Item]) -> some View {
         VStack(spacing: 10) {
             ForEach(items) { item in
-                NavigationLink(destination: LogDetailView(item: item, dailyCount: items.count)) {
+                NavigationLink(destination: LogDetailView(item: item)) {
                     VStack(alignment: .leading, spacing: 12) {
                         HStack {
                             Text(date)
@@ -137,7 +137,7 @@ struct LogView: View {
                                 ForEach(0..<5, id: \.self) { index in
                                     Image(systemName: "flame.fill")
                                         .font(.system(size: 14))
-                                        .foregroundColor(index < items.count
+                                        .foregroundColor(index < item.intensity
                                             ? Color(red: 0.9, green: 0.35, blue: 0.25)
                                             : Color.white.opacity(0.15))
                                 }
@@ -188,7 +188,7 @@ struct LogView: View {
 
         for i in 0..<7 {
             let date = calendar.date(byAdding: .day, value: i, to: monday)!
-            let count = items.filter { calendar.isDate($0.timestamp, inSameDayAs: date) }.count
+            let count = items.filter { calendar.isDate($0.timestamp, inSameDayAs: date) }.map(\.intensity).max() ?? 0
             result.append(DayData(label: labels[i], count: count))
         }
         return result
