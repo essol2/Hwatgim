@@ -286,6 +286,9 @@ struct BreathingView: View {
         .fullScreenCover(isPresented: $showRecordView) {
             RecordView()
         }
+        .onAppear {
+            currentQuote = QuoteService.randomQuote()
+        }
     }
 
     // MARK: - Quote Card
