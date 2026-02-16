@@ -11,26 +11,30 @@ struct LogView: View {
     @Query(sort: \Item.timestamp, order: .reverse) private var items: [Item]
 
     var body: some View {
-        ZStack {
-            Color(red: 0.1, green: 0.1, blue: 0.1)
-                .ignoresSafeArea()
+        NavigationStack {
+            ZStack {
+                Color(red: 0.1, green: 0.1, blue: 0.1)
+                    .ignoresSafeArea()
 
-            ScrollView {
-                VStack(alignment: .leading, spacing: 24) {
-                    // MARK: - Header
-                    headerSection
+                ScrollView(showsIndicators: false) {
+                    VStack(alignment: .leading, spacing: 24) {
+                        // MARK: - Header
+                        headerSection
 
-                    // MARK: - Weekly Heatmap
-                    weeklyHeatmapCard
+                        // MARK: - Weekly Heatmap
+                        weeklyHeatmapCard
 
-                    // MARK: - Recent Records
-                    recentRecordsSection
+                        // MARK: - Recent Records
+                        recentRecordsSection
+                    }
+                    .padding(.horizontal, 24)
+                    .padding(.top, 16)
+                    .padding(.bottom, 24)
                 }
-                .padding(.horizontal, 24)
-                .padding(.top, 16)
-                .padding(.bottom, 24)
             }
+            .navigationBarHidden(true)
         }
+        .background(Color(red: 0.1, green: 0.1, blue: 0.1).ignoresSafeArea())
     }
 
     // MARK: - Header
@@ -117,49 +121,51 @@ struct LogView: View {
 
     // MARK: - Record Card
     private func recordCard(date: String, items: [Item]) -> some View {
-        VStack(alignment: .leading, spacing: 12) {
-            HStack {
-                // Date
-                Text(date)
-                    .font(.custom("HakgyoansimDunggeunmisoOTF-B", size: 16))
-                    .foregroundColor(.white)
+        VStack(spacing: 10) {
+            ForEach(items) { item in
+                NavigationLink(destination: LogDetailView(item: item)) {
+                    VStack(alignment: .leading, spacing: 12) {
+                        HStack {
+                            Text(date)
+                                .font(.custom("HakgyoansimDunggeunmisoOTF-B", size: 16))
+                                .foregroundColor(.white)
 
-                Spacer()
+                            Spacer()
 
-                // Flame indicators (max 5)
-                HStack(spacing: 2) {
-                    ForEach(0..<5, id: \.self) { index in
-                        Image(systemName: "flame.fill")
-                            .font(.system(size: 14))
-                            .foregroundColor(index < items.count
-                                ? Color(red: 0.9, green: 0.35, blue: 0.25)
-                                : Color.white.opacity(0.15))
+                            // Flame indicators (max 5)
+                            HStack(spacing: 2) {
+                                ForEach(0..<5, id: \.self) { index in
+                                    Image(systemName: "flame.fill")
+                                        .font(.system(size: 14))
+                                        .foregroundColor(index < item.intensity
+                                            ? Color(red: 0.9, green: 0.35, blue: 0.25)
+                                            : Color.white.opacity(0.15))
+                                }
+                            }
+                        }
+
+                        HStack(spacing: 8) {
+                            if !item.reason.isEmpty {
+                                LogChip(title: item.reason, style: .reason)
+                            }
+                            if !item.mood.isEmpty {
+                                LogChip(title: item.mood, style: .mood)
+                            }
+                        }
                     }
+                    .padding(18)
+                    .background(
+                        RoundedRectangle(cornerRadius: 14)
+                            .fill(Color.white.opacity(0.06))
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 14)
+                            .stroke(Color.white.opacity(0.08), lineWidth: 1)
+                    )
                 }
-            }
-
-            // Chips for reason & mood (from first item, but show all unique)
-            let reasons = Array(Set(items.compactMap { $0.reason.isEmpty ? nil : $0.reason }))
-            let moods = Array(Set(items.compactMap { $0.mood.isEmpty ? nil : $0.mood }))
-
-            HStack(spacing: 8) {
-                ForEach(reasons, id: \.self) { reason in
-                    LogChip(title: reason, style: .reason)
-                }
-                ForEach(moods, id: \.self) { mood in
-                    LogChip(title: mood, style: .mood)
-                }
+                .buttonStyle(.plain)
             }
         }
-        .padding(18)
-        .background(
-            RoundedRectangle(cornerRadius: 14)
-                .fill(Color.white.opacity(0.06))
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: 14)
-                .stroke(Color.white.opacity(0.08), lineWidth: 1)
-        )
     }
 
     // MARK: - Helpers
@@ -182,7 +188,7 @@ struct LogView: View {
 
         for i in 0..<7 {
             let date = calendar.date(byAdding: .day, value: i, to: monday)!
-            let count = items.filter { calendar.isDate($0.timestamp, inSameDayAs: date) }.count
+            let count = items.filter { calendar.isDate($0.timestamp, inSameDayAs: date) }.map(\.intensity).max() ?? 0
             result.append(DayData(label: labels[i], count: count))
         }
         return result

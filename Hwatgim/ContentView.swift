@@ -7,9 +7,10 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    @State private var selectedTab: Int = 0
+    @Binding var selectedTab: Int
 
-    init() {
+    init(selectedTab: Binding<Int> = .constant(0)) {
+        self._selectedTab = selectedTab
         // Dark TabBar appearance
         let appearance = UITabBarAppearance()
         appearance.configureWithOpaqueBackground()
@@ -53,10 +54,11 @@ struct ContentView: View {
                 }
                 .tag(2)
         }
+        .background(Color(red: 0.1, green: 0.1, blue: 0.1).ignoresSafeArea())
     }
 }
 
 #Preview {
-    ContentView()
+    ContentView(selectedTab: .constant(0))
         .modelContainer(for: Item.self, inMemory: true)
 }

@@ -15,6 +15,7 @@ struct RecordView: View {
     @State private var selectedMood: String? = nil
     @State private var customMoodText: String = ""
     @State private var detailText: String = ""
+    @State private var selectedIntensity: Int = 3
     @FocusState private var focusedField: FocusField?
 
     private let reasons = ["사람", "업무", "환경"]
@@ -52,6 +53,7 @@ struct RecordView: View {
                     VStack(alignment: .leading, spacing: 32) {
                         reasonSection
                         moodSection
+                        intensitySection
                         detailSection
                     }
                     .padding(.horizontal, 24)
@@ -205,6 +207,31 @@ struct RecordView: View {
         )
     }
 
+    // MARK: - Intensity Section
+    private var intensitySection: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text("얼마나 화가 나나요?")
+                .font(.custom("HakgyoansimDunggeunmisoOTF-B", size: 20))
+                .foregroundColor(.white)
+
+            HStack(spacing: 12) {
+                ForEach(1...5, id: \.self) { level in
+                    Button {
+                        withAnimation(.easeInOut(duration: 0.15)) {
+                            selectedIntensity = level
+                        }
+                    } label: {
+                        Image(systemName: "flame.fill")
+                            .font(.system(size: 28))
+                            .foregroundColor(level <= selectedIntensity
+                                ? Color(red: 0.9, green: 0.35, blue: 0.25)
+                                : Color.white.opacity(0.15))
+                    }
+                }
+            }
+        }
+    }
+
     // MARK: - Detail Section
     private var detailSection: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -279,7 +306,8 @@ struct RecordView: View {
             timestamp: Date(),
             reason: finalReason,
             mood: finalMood,
-            detail: detailText.trimmingCharacters(in: .whitespacesAndNewlines)
+            detail: detailText.trimmingCharacters(in: .whitespacesAndNewlines),
+            intensity: selectedIntensity
         )
         modelContext.insert(newItem)
         dismiss()

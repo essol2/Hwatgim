@@ -12,11 +12,13 @@ final class Item {
     var reason: String
     var mood: String
     var detail: String
+    var intensity: Int = 3
 
-    init(timestamp: Date, reason: String = "", mood: String = "", detail: String = "") {
+    init(timestamp: Date, reason: String = "", mood: String = "", detail: String = "", intensity: Int = 3) {
         self.timestamp = timestamp
         self.reason = reason
         self.mood = mood
         self.detail = detail
+        self.intensity = intensity
     }
 }
