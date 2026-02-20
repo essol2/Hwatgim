@@ -21,6 +21,7 @@
 		A100000C /* quotes.json in Resources */ = {isa = PBXBuildFile; fileRef = A200000C /* quotes.json */; };
 		A100000D /* QuoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200000D /* QuoteService.swift */; };
 		A100000E /* LogDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200000E /* LogDetailView.swift */; };
+		A1000010 /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000011 /* ReportView.swift */; };
 		B1000001 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2000001 /* WidgetKit.framework */; };
 		B1000002 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2000002 /* SwiftUI.framework */; };
 		B1000003 /* HwatgimWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2000003 /* HwatgimWidget.swift */; };
@@ -69,6 +70,7 @@
 		A200000D /* QuoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteService.swift; sourceTree = "<group>"; };
 		A2000010 /* Hwatgim.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hwatgim.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A200000E /* LogDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogDetailView.swift; sourceTree = "<group>"; };
+		A2000011 /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		B2000001 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		B2000002 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		B2000003 /* HwatgimWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HwatgimWidget.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				A200000E /* LogDetailView.swift */,
 				A2000008 /* SettingsView.swift */,
 				A200000B /* RecordView.swift */,
+				A2000011 /* ReportView.swift */,
 				A200000C /* quotes.json */,
 				A200000D /* QuoteService.swift */,
 				A4000005 /* Fonts */,
@@ -283,6 +286,7 @@
 				A1000008 /* SettingsView.swift in Sources */,
 				A100000B /* RecordView.swift in Sources */,
 				A100000D /* QuoteService.swift in Sources */,
+				A1000010 /* ReportView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

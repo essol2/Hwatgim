@@ -47,12 +47,19 @@ struct ContentView: View {
                 }
                 .tag(1)
 
+            ReportView()
+                .tabItem {
+                    Image(systemName: "doc.text.magnifyingglass")
+                    Text("보고서")
+                }
+                .tag(2)
+
             SettingsView()
                 .tabItem {
                     Image(systemName: "gearshape")
                     Text("설정")
                 }
-                .tag(2)
+                .tag(3)
         }
         .background(Color(red: 0.1, green: 0.1, blue: 0.1).ignoresSafeArea())
     }
