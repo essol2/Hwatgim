@@ -7,6 +7,11 @@
 		<string>HakgyoansimDunggeunmisoOTF-B.otf</string>
 		<string>HakgyoansimDunggeunmisoOTF-R.otf</string>
 	</array>
+	<key>UILaunchScreen</key>
+	<dict>
+		<key>BackgroundColor</key>
+		<string>LaunchBackground</string>
+	</dict>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>

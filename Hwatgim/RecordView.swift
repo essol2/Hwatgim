@@ -284,30 +284,15 @@ struct RecordView: View {
         selectedReason != nil || selectedMood != nil || !detailText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
     }
 
-    /// 최종 저장 값: "기타"인 경우 직접 입력한 텍스트 사용
-    private var finalReason: String {
-        if selectedReason == "기타" {
-            let trimmed = customReasonText.trimmingCharacters(in: .whitespacesAndNewlines)
-            return trimmed.isEmpty ? "기타" : trimmed
-        }
-        return selectedReason ?? ""
-    }
-
-    private var finalMood: String {
-        if selectedMood == "기타" {
-            let trimmed = customMoodText.trimmingCharacters(in: .whitespacesAndNewlines)
-            return trimmed.isEmpty ? "기타" : trimmed
-        }
-        return selectedMood ?? ""
-    }
-
     private func saveRecord() {
         let newItem = Item(
             timestamp: Date(),
-            reason: finalReason,
-            mood: finalMood,
+            reason: selectedReason ?? "",
+            mood: selectedMood ?? "",
             detail: detailText.trimmingCharacters(in: .whitespacesAndNewlines),
-            intensity: selectedIntensity
+            intensity: selectedIntensity,
+            customReason: selectedReason == "기타" ? customReasonText.trimmingCharacters(in: .whitespacesAndNewlines) : "",
+            customMood: selectedMood == "기타" ? customMoodText.trimmingCharacters(in: .whitespacesAndNewlines) : ""
         )
         modelContext.insert(newItem)
         dismiss()

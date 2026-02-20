@@ -154,6 +154,27 @@ struct LogDetailView: View {
                     LogChip(title: item.mood, style: .mood)
                 }
             }
+
+            if !item.customReason.isEmpty || !item.customMood.isEmpty {
+                VStack(alignment: .leading, spacing: 6) {
+                    if !item.customReason.isEmpty {
+                        Text(item.customReason)
+                            .font(.custom("HakgyoansimDunggeunmisoOTF-R", size: 15))
+                            .foregroundColor(.white.opacity(0.9))
+                    }
+                    if !item.customMood.isEmpty {
+                        Text(item.customMood)
+                            .font(.custom("HakgyoansimDunggeunmisoOTF-R", size: 15))
+                            .foregroundColor(.white.opacity(0.9))
+                    }
+                }
+                .padding(14)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(Color.white.opacity(0.06))
+                )
+            }
         }
     }
 
