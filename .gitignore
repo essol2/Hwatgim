@@ -14,6 +14,12 @@ Packages/
 *.swp
 *~
 
+# Claude Code
+.claude/
+
+# Xcode Workspace
+*.xcodeproj/project.xcworkspace/
+
 # Misc
 *.moved-aside
 *.pbxuser
