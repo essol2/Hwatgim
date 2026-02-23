@@ -429,7 +429,7 @@ struct BreathingView: View {
             HStack(spacing: 8) {
                 Image(systemName: "wind")
                     .font(.system(size: 14))
-                Text("마음 날려보내기")
+                Text("분노 날려보내기")
                     .font(.custom("HakgyoansimDunggeunmisoOTF-R", size: 16))
             }
             .foregroundColor(.white.opacity(0.8))
@@ -447,8 +447,12 @@ struct BreathingView: View {
         Button(action: {
             showRecordView = true
         }) {
-            Text("분노 기록하기")
-                .font(.custom("HakgyoansimDunggeunmisoOTF-R", size: 16))
+            HStack(spacing: 8) {
+                Image(systemName: "pencil.line")
+                    .font(.system(size: 14))
+                Text("분노 기록하기")
+                    .font(.custom("HakgyoansimDunggeunmisoOTF-R", size: 16))
+            }
                 .foregroundColor(.white.opacity(0.8))
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 16)

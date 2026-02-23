@@ -27,7 +27,6 @@ struct BambooForestView: View {
     @State private var flyingCharacters: [FlyingCharacter] = []
     @State private var showText = true
     @State private var textOpacity: Double = 1.0
-    @State private var showCompletionMessage = false
     @FocusState private var isTextFocused: Bool
 
     var body: some View {
@@ -52,41 +51,6 @@ struct BambooForestView: View {
                 }
                 .padding(.horizontal, 12)
 
-                if showCompletionMessage {
-                    // Completion state
-                    Spacer()
-                    VStack(spacing: 16) {
-                        Text("🌿")
-                            .font(.system(size: 56))
-
-                        Text("잘 날려보냈어요")
-                            .font(.custom("HakgyoansimDunggeunmisoOTF-B", size: 22))
-                            .foregroundColor(.white.opacity(0.9))
-
-                        Text("마음이 조금 가벼워졌길 바라요")
-                            .font(.custom("HakgyoansimDunggeunmisoOTF-R", size: 15))
-                            .foregroundColor(.white.opacity(0.5))
-                    }
-                    .frame(maxWidth: .infinity)
-                    .transition(.opacity)
-                    Spacer()
-
-                    // Write again button
-                    Button(action: resetForNewEntry) {
-                        Text("다시 쓰기")
-                            .font(.custom("HakgyoansimDunggeunmisoOTF-R", size: 16))
-                            .foregroundColor(.white.opacity(0.8))
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 16)
-                            .background(
-                                RoundedRectangle(cornerRadius: 12)
-                                    .fill(Color.white.opacity(0.12))
-                            )
-                    }
-                    .padding(.horizontal, 24)
-                    .padding(.bottom, 16)
-                } else {
-                    // Input state
                     VStack(alignment: .leading, spacing: 16) {
                         Text("마음속 이야기를 꺼내보세요")
                             .font(.custom("HakgyoansimDunggeunmisoOTF-B", size: 20))
@@ -118,7 +82,7 @@ struct BambooForestView: View {
 
                                 // Text editor
                                 TextEditor(text: $text)
-                                    .font(.custom("HakgyoansimDunggeunmisoOTF-R", size: 16))
+                                    .font(.system(size: 16))
                                     .foregroundColor(.white)
                                     .scrollContentBackground(.hidden)
                                     .padding(.horizontal, 12)
@@ -159,7 +123,6 @@ struct BambooForestView: View {
                     .disabled(!canFly)
                     .padding(.horizontal, 24)
                     .padding(.bottom, 16)
-                }
             }
         }
     }
@@ -191,12 +154,10 @@ struct BambooForestView: View {
                 // Characters are now visible at their start positions
             }
 
-            // After all characters have flown away, show completion
+            // After all characters have flown away, dismiss
             let maxDuration = flyingCharacters.map { $0.delay + $0.duration }.max() ?? 2.0
             DispatchQueue.main.asyncAfter(deadline: .now() + maxDuration + 0.3) {
-                withAnimation(.easeInOut(duration: 0.5)) {
-                    showCompletionMessage = true
-                }
+                dismiss()
             }
         }
     }
@@ -245,14 +206,6 @@ struct BambooForestView: View {
         flyingCharacters = characters
     }
 
-    private func resetForNewEntry() {
-        text = ""
-        isFlying = false
-        flyingCharacters = []
-        showText = true
-        textOpacity = 1.0
-        showCompletionMessage = false
-    }
 }
 
 // MARK: - Flying Character View
@@ -264,7 +217,7 @@ private struct FlyingCharacterView: View {
 
     var body: some View {
         Text(character.character)
-            .font(.custom("HakgyoansimDunggeunmisoOTF-R", size: 16))
+            .font(.system(size: 16))
             .foregroundColor(.white)
             .position(
                 x: hasStarted ? character.endX : character.startX,
