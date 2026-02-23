@@ -252,6 +252,7 @@ private class DisplayLinkProxy {
 struct BreathingView: View {
     @State private var viewModel = BreathingViewModel()
     @State private var showRecordView = false
+    @State private var showBambooForest = false
     @State private var currentQuote: Quote? = QuoteService.randomQuote()
 
     private let maxCircleSize: CGFloat = 300
@@ -277,14 +278,20 @@ struct BreathingView: View {
 
                 Spacer()
 
-                // Quick Record Button
-                quickRecordButton
-                    .padding(.horizontal, 24)
-                    .padding(.bottom, 16)
+                // Bottom Buttons
+                HStack(spacing: 10) {
+                    bambooForestButton
+                    quickRecordButton
+                }
+                .padding(.horizontal, 24)
+                .padding(.bottom, 16)
             }
         }
         .fullScreenCover(isPresented: $showRecordView) {
             RecordView()
+        }
+        .fullScreenCover(isPresented: $showBambooForest) {
+            BambooForestView()
         }
         .onAppear {
             currentQuote = QuoteService.randomQuote()
@@ -412,6 +419,27 @@ struct BreathingView: View {
                     viewModel.stopPressing()
                 }
         )
+    }
+
+    // MARK: - Bamboo Forest Button
+    private var bambooForestButton: some View {
+        Button(action: {
+            showBambooForest = true
+        }) {
+            HStack(spacing: 8) {
+                Image(systemName: "wind")
+                    .font(.system(size: 14))
+                Text("마음 날려보내기")
+                    .font(.custom("HakgyoansimDunggeunmisoOTF-R", size: 16))
+            }
+            .foregroundColor(.white.opacity(0.8))
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 16)
+            .background(
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(Color.white.opacity(0.12))
+            )
+        }
     }
 
     // MARK: - Quick Record Button
