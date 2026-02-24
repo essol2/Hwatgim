@@ -55,10 +55,10 @@ struct FoundationModelReportService: ReportServiceProtocol {
         analysis: EmotionPatternAnalysis,
         sentiment: SentimentResult?
     ) async -> NaturalLanguageInsight {
-        #if canImport(FoundationModels)
+        #if os(iOS) && canImport(FoundationModels)
         if #available(iOS 26.0, *) {
             do {
-                guard LanguageModel.isAvailable else {
+                guard SystemLanguageModel.default.isAvailable else {
                     return fallbackInsight(analysis: analysis)
                 }
 
@@ -76,10 +76,10 @@ struct FoundationModelReportService: ReportServiceProtocol {
     }
 
     private func generateAITips(analysis: EmotionPatternAnalysis) async -> [EmotionManagementTip] {
-        #if canImport(FoundationModels)
+        #if os(iOS) && canImport(FoundationModels)
         if #available(iOS 26.0, *) {
             do {
-                guard LanguageModel.isAvailable else {
+                guard SystemLanguageModel.default.isAvailable else {
                     return EmotionTipsProvider.matchTips(for: analysis)
                 }
 

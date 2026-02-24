@@ -642,8 +642,11 @@
 				DEVELOPMENT_TEAM = WC5T233HM3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "HwatgimWatch Watch App/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = HwatgimWatch;
+				INFOPLIST_KEY_UIAppFonts = (
+					"Fonts/HakgyoansimDunggeunmisoOTF-B.otf",
+					"Fonts/HakgyoansimDunggeunmisoOTF-R.otf",
+				);
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.essol2.hwatgim;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -676,8 +679,11 @@
 				DEVELOPMENT_TEAM = WC5T233HM3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "HwatgimWatch Watch App/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = HwatgimWatch;
+				INFOPLIST_KEY_UIAppFonts = (
+					"Fonts/HakgyoansimDunggeunmisoOTF-B.otf",
+					"Fonts/HakgyoansimDunggeunmisoOTF-R.otf",
+				);
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.essol2.hwatgim;
 				LD_RUNPATH_SEARCH_PATHS = (
